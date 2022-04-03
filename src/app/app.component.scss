@@ -1,0 +1,16 @@
+.layout {
+    display: grid;
+    grid-template-columns: [full-start] minmax(12rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 1fr) [col-end]) [center-end] minmax(12rem, 1fr) [full-end];
+    grid-template-rows: min-content calc(100vh - 8rem);
+}
+
+.header {
+    grid-row: 1 / span 1;
+    grid-column: full-start / full-end;
+}
+
+.content {
+    padding: 5rem 0;
+    grid-row: 2 / -1;
+    grid-column: center-start / center-end;
+}
