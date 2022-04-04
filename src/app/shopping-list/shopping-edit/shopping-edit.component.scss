@@ -1,0 +1,9 @@
+.form-shopping-edit{
+    width: 40%;
+}
+
+.form__group--3{
+    & > *:not(:last-child){
+        margin-right: 2rem;
+    }
+}

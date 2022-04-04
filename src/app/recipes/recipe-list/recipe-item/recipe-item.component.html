@@ -1,1 +1,13 @@
-<p>recipe-item works!</p>
+<div class="recipe-card">
+    <div class="recipe-card__content">
+        <h3 class="recipe-card__name">
+            {{recipe.name}}
+        </h3>
+        <p class="recipe-card__description">
+            {{recipe.description}}
+        </p>
+    </div>
+    <div class="recipe-card__img-box">
+        <img [src]="recipe.imagePath" [alt]="recipe.description" class="recipe-card__img">
+    </div>
+</div>

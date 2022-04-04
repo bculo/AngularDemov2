@@ -1,0 +1,44 @@
+.recipe-card {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    cursor: pointer;
+    padding: 1.5rem;
+    box-shadow: 0rem 1rem 2.5rem rgba(0, 0, 0, .15);
+    border-radius: .5rem;
+
+    transition: transform .2s;
+
+    &__content {
+        grid-column: 1 / span 1;
+    }
+
+    &__img-box {
+        grid-column: 2 / span 1;
+        height: 20rem;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    &__name {
+        font-size: 2.2rem;
+    }
+
+    &__description {
+        font-size: 1.6rem;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &:hover {
+        transform: scale(1.03);
+    }  
+
+    &:not(:last-child){
+        margin-bottom: 2rem;     
+    }
+}
