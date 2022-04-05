@@ -1,5 +1,5 @@
 <div class="shoping-list-container">
-    <app-shopping-edit class="mb-small" (ingredientAdded)="onIngredientAdded($event)"></app-shopping-edit>
+    <app-shopping-edit class="mb-small"></app-shopping-edit>
     <ul class="ingredient-container">
         <li *ngFor="let ingredient of ingredients" class="ingredient-container__item"><a href="#" class="ingredient-container__link">{{ingredient.name}} ({{ingredient.amount}})</a></li>
     </ul>

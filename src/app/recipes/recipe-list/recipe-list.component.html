@@ -2,5 +2,5 @@
     <button class="btn">New recipe</button>
 </div>
 <div class="recipe-list-items">
-    <app-recipe-item *ngFor="let item of recipes" [recipe]="item" (recipeSelected)="onRecipeSelected(item)"></app-recipe-item> 
+    <app-recipe-item *ngFor="let item of recipes" [recipe]="item"></app-recipe-item> 
 </div>

@@ -8,4 +8,32 @@
         font-size: 2.4rem;
     }
 
+    &__description {
+        font-size: 1.6rem;
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    &__ingredients-box {
+        list-style: none;
+        border-radius: 1rem;
+        box-shadow: 0rem 1rem 2.5rem rgb(0 0 0 / 15%);
+        overflow: hidden;
+    }
+
+    &__ingredient-item {
+        padding: 1rem 1rem;
+        font-size: 1.6rem;
+        background-color: #fff;
+    }
+
+    &__ingredient-item:not(:last-child) {
+        border-bottom: 1px solid #eeeee4;       
+    }
 }

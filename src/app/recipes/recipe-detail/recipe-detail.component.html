@@ -1,15 +1,17 @@
 <div class="recipe-detail">
+    <img class="recipe-detail__image mb-small" [src]="recipe.imagePath" [alt]="recipe.description"/>
     <h3 class="recipe-detail__heading mb-small">
         {{recipe.name}}
     </h3>
     <div class="recipe-detail__actions mb-small">
-        <button class="btn">To shopping list</button>
+        <button class="btn btn--green" (click)="onAddToShoppingList()">To shopping list</button>
         <button class="btn">Edit recipe</button>
         <button class="btn btn--red">Delete recipe</button>
     </div>
-    <div class="recipe-detail__content">
-        <p class="recipe-detail__description">
-            {{recipe.description}}
-        </p>
-    </div>
+    <p class="recipe-detail__description mb-small">
+        {{recipe.description}}
+    </p>
+    <ul class="recipe-detail__ingredients-box">
+        <li class="recipe-detail__ingredient-item" *ngFor="let ingredient of recipe.ingredients"> {{ ingredient.name }} - ({{ ingredient.amount }}) </li>
+    </ul>
 </div>
