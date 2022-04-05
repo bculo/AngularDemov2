@@ -1,7 +1,7 @@
 <div class="layout">
-    <app-header class="header"></app-header>
+    <app-header class="header" (featureSelected)="onNavigate($event)"></app-header>
     <section class="content">
-        <app-recipes></app-recipes>
-        <app-shopping-list></app-shopping-list>
+        <app-recipes *ngIf="loadedFeature == 'recipe'"></app-recipes>
+        <app-shopping-list *ngIf="loadedFeature == 'shopping-list'"></app-shopping-list>
     </section>
 </div>
