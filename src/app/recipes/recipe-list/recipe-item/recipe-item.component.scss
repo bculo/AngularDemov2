@@ -41,4 +41,8 @@
     &:not(:last-child){
         margin-bottom: 2rem;     
     }
+
+    &--active {
+        background-color: #eeeeee;
+    }
 }

@@ -12,20 +12,60 @@
 
     &__item {       
         display: inline-block;
+        text-transform: uppercase;
+        font-size: 1.4rem;
 
-        a:visited,
-        a:link {
-            padding: 1rem 2rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 1.4rem;
-            display: inline-block;
-            transition: all .2s;
-            
-            &:hover {
-                background-color: orangered;
-            }
-        } 
+        &--active {
+            background-color: #eee;
+        }
+    }
+
+    &__link:visited,
+    &__link:link {
+        text-decoration: none;
+        padding: 1rem 2rem;
+        display: inline-block;
+        transition: all .2s;
+        
+        &:hover {
+            background-color: orangered;
+        }
+    } 
+
+    &__dropdown{
+        padding: 1rem 2rem;
+        position: relative;
+        cursor: pointer;
+    }
+
+    &__dropdown:hover &__dropdown-container  {
+        width: 100%;
+        opacity: 100%; 
+    }
+
+    &__dropdown-container {
+        transition: all .2s;
+        position: absolute;
+        width: 0%;
+        opacity: 0%;
+        top: 100%;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, .15);
+    }
+
+    &__dropdown-item {
+        display: block;
+        text-decoration: none;
+        padding: 1rem 1rem;
+        
+        &:not(:last-child){
+            border-bottom: 1px solid silver;
+        }
+
+        &:hover {
+            background-color: #eeeeee;
+        }
     }
 }
 

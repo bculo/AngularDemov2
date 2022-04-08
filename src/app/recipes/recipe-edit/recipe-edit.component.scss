@@ -1,0 +1,37 @@
+.form-recipe-manage{
+    width: 100%;
+
+    &--name-input {
+        width: 50%;
+    }
+
+    &--amount-input {
+        width: 30%;
+    }
+}
+
+.form-recipe-manage__img{
+    display: block;
+    width: 100%;
+}
+
+.form__group--1{
+    & > *:not(:last-child){
+        margin-right: 2rem;
+    }
+}
+
+.form__group--5{
+    & > *:not(:last-child){
+        margin-right: 2rem;
+    }
+
+    &:not(:last-child){
+        margin-bottom: 1rem;
+    }
+}
+
+input.ng-invalid.ng-touched, 
+textarea.ng-invalid.ng-touched {
+    border: 1px solid red;;
+}

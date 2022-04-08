@@ -5,8 +5,8 @@
     </h3>
     <div class="recipe-detail__actions mb-small">
         <button class="btn btn--green" (click)="onAddToShoppingList()">To shopping list</button>
-        <button class="btn">Edit recipe</button>
-        <button class="btn btn--red">Delete recipe</button>
+        <button class="btn" routerLink="edit">Edit recipe</button>
+        <button class="btn btn--red" (click)="onDeleteRecipe()">Delete recipe</button>
     </div>
     <p class="recipe-detail__description mb-small">
         {{recipe.description}}

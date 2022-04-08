@@ -1,0 +1,67 @@
+<form class="form-recipe-manage" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="form__group form__group--1">
+        <button 
+            class="btn btn--green" 
+            type="submit"
+            [disabled]="!recipeForm.valid">
+            Save
+        </button>
+        <button class="btn btn--red" type="button" (click)="onCancel()">Cancel</button>
+    </div>
+    <div class="form__group form__group--2">
+        <label for="name" class="form__label">Name</label>
+        <input 
+            type="text" 
+            id="name" 
+            class="form__input"
+            name="name"
+            formControlName="name">
+    </div>
+    <div class="form__group form__group--3">
+        <label for="imagePath" class="form__label">Image</label> 
+        <input 
+            type="text" 
+            id="imagePath" 
+            class="form__input"
+            name="imagePath"
+            formControlName="imagePath"
+            #imagePath>
+    </div>
+    <div class="form__group">
+        <img [src]="imagePath.value" alt="uploded-image" class="form-recipe-manage__img">
+    </div>
+    <div class="form__group form__group--4">
+        <label for="description" class="form__label">Description</label>
+        <textarea 
+            id="description" 
+            class="form__textarea"
+            name="description"
+            rows="6"
+            formControlName="description"></textarea>
+    </div>
+    <div class="form__group"> 
+        <div formArrayName="ingredients">
+            <div class="form__group--5"
+                *ngFor="let ingredientCtrl of controls; let i = index"
+                [formGroupName]="i">
+                <input 
+                    type="text" 
+                    class="form__inl-input form-recipe-manage--name-input"
+                    formControlName="name">
+                <input 
+                    type="amount" 
+                    class="form__inl-input form-recipe-manage--amount-input"
+                    formControlName="amount">
+                <button class="btn btn--red" type="button" (click)="onDeleteIngredient(i)">X</button>
+            </div>
+        </div>
+    </div> 
+    <div class="form__group">
+        <button 
+            class="btn btn--green" 
+            type="button"
+            (click)="onAddIngredient()">
+            Add ingredient
+        </button>
+    </div>
+</form>

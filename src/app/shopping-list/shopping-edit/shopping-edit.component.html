@@ -1,11 +1,14 @@
-<form class="form form-shopping-edit">
+<form (ngSubmit)="onAddItem(f)" 
+    #f="ngForm" class="form form-shopping-edit">
     <div class="form__group form__group--1">
         <label for="name" class="form__label">Name</label>
         <input 
             type="text" 
             id="name" 
             class="form__input"
-            #nameInput>
+            name="name"
+            ngModel
+            required>
     </div>
     <div class="form__group form__group--2">
         <label for="amount" class="form__label">Amount</label>
@@ -13,11 +16,17 @@
             type="number" 
             id="amount" 
             class="form__input"
-            #amountInput>
+            ngModel
+            required
+            name="amount"
+            pattern="^[1-9]+[0-9]*$">
     </div>
     <div class="form__group form__group--3">
-        <button class="btn btn--green" type="submit" (click)="onAddItem()">Add</button>
-        <button class="btn btn--red">Delete</button>
-        <button class="btn">Clear</button>
+        <button 
+            class="btn btn--green" 
+            type="submit" 
+            [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+        <button class="btn btn--red" type="button" (click)="deleteIngredient()" [disabled]="!editMode">Delete</button>
+        <button class="btn" type="button" (click)="clearForm()">Clear</button>
     </div>
 </form>

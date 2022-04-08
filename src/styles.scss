@@ -43,6 +43,11 @@ body {
     &--green {
         background-color: green;
     }
+
+    &:disabled {
+        background-color: lighten(#5b618a, 10%);
+        cursor: default;
+    }
 }
 
 .mb-small {
@@ -60,15 +65,35 @@ body {
         font-weight: bold;
     }
 
-    &__input {
-        display: block;
-        width: 100%;
+    &__input,
+    &__inl-input {
         padding: 1rem 1rem;
         border-radius: 5px;
+        border: 1px solid black;
         font-size: 1.6rem;
 
         &:focus{
             outline: none;
         }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+    }
+
+    &__textarea {
+        display: block;
+        width: 100%;
+        resize: none;
+
+        
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__inl-input {
+        display: inline-block;
     }
 }

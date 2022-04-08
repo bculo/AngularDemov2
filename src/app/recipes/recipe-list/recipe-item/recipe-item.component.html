@@ -1,4 +1,6 @@
-<div class="recipe-card" (click)="onSelect()">
+<div class="recipe-card"
+    [routerLink]="[index]"
+    routerLinkActive="recipe-card--active">
     <div class="recipe-card__content">
         <h3 class="recipe-card__name">
             {{recipe.name}}

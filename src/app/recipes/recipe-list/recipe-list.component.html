@@ -1,6 +1,6 @@
 <div class="recipe-list-actions mb-small">
-    <button class="btn">New recipe</button>
+    <button class="btn" (click)="onNewRecipe()">New recipe</button>
 </div>
 <div class="recipe-list-items">
-    <app-recipe-item *ngFor="let item of recipes" [recipe]="item"></app-recipe-item> 
+    <app-recipe-item *ngFor="let item of recipes; let i = index" [recipe]="item" [index]="i"></app-recipe-item> 
 </div>
