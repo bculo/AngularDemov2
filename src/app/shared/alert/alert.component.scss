@@ -1,0 +1,31 @@
+.alert{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba(2, 43, 87, 0.8), 
+        rgba(12,95,149, 0.8));
+
+    &__box {
+        position: fixed;
+        width: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: .5rem 2rem;
+        background-color: #fff;
+    }
+
+    &__heading{
+        font-size: 1.6rem;
+        padding: 1rem 0;
+    }
+
+    &__actions {
+        text-align: right;
+        margin: 1rem 0;
+    }
+}

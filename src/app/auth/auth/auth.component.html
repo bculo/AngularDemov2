@@ -1,7 +1,9 @@
 <div class="auth-container">
-    <div *ngIf="errorMessage" class="auth-error-message mb-small">
+    <!--<div *ngIf="errorMessage" class="auth-error-message mb-small">
        {{ errorMessage }}
-    </div>
+    </div>-->
+    <!--<app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onModalClose()"></app-alert>-->
+    <div appPlaceholder=""></div>
     <form class="auth-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <div class="form__group">
             <label for="email" class="form__label">Email</label>
