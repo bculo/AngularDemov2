@@ -1,3 +1,5 @@
+
+/*
 import { EventEmitter, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -44,4 +46,7 @@ export class ShoppingListService {
     this.ingredients.splice(index, 1);
     this.ingredientAdded.next(this.getIngredients());
   }
+
+
 }
+  */

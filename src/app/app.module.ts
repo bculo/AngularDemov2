@@ -9,7 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
-import { shoppingListReducer } from './shopping-list/store/shopping-list.recuder';
+import * as fromApp from './store/app.reducer';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.recuder
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    StoreModule.forRoot(fromApp.appReducer),
     SharedModule,
 
   ],

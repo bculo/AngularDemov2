@@ -1,10 +1,5 @@
-import { Action } from "@ngrx/store";
 import { Ingredient } from "src/app/shared/ingredient.model";
 import * as ShoppingListActions from "./shopping-list.actions";
-
-export interface AppState {
-    shoppingList: State;
-}
 
 export interface State {
     ingredients: Ingredient[],
@@ -23,7 +18,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         case ShoppingListActions.ADD_INGREDIENT:       
             return {
                 ...state,
-                ingredients: [...state.ingredients, action.payload]
+                ingredients: [...state.ingredients, (action as ShoppingListActions.AddIngredient).payload]
             };
         case ShoppingListActions.ADD_INGREDIENTS:
             return {
@@ -33,30 +28,45 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         case ShoppingListActions.UPDATE_INGREDIENT:
             const updateAction = action as ShoppingListActions.UpdateIngredient;
 
-            const ingredient = state.ingredients[updateAction.payload.index];
+            const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
                 ...ingredient, 
-                ...updateAction.payload.ingredient
+                ...updateAction.payload
             };
 
             const updatedIngredients = [...state.ingredients];
-            updatedIngredients[updateAction.payload.index] = updatedIngredient;
+            updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
 
             return {
                 ...state,
-                ingredients: updatedIngredients
+                ingredients: updatedIngredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1,
             };
         case ShoppingListActions.DELETE_INGREDIENT:
-            const deleteAction = action as ShoppingListActions.DeleteIngredient;
-
             const oldIngredients = state.ingredients.filter((value, index) => {
-                if(index == deleteAction.payload.index) return false;
+                if(index == state.editedIngredientIndex) return false;
                 return true;
             });
 
             return {
                 ...state,
-                ingredients: oldIngredients
+                ingredients: oldIngredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1,
+            };
+        case ShoppingListActions.START_EDIT:
+            const startEditAction = action as ShoppingListActions.StartEdit;
+            return {
+                ...state,
+                editedIngredientIndex: startEditAction.payload,
+                editedIngredient: {...state.ingredients[startEditAction.payload]}
+            };
+        case ShoppingListActions.STOP_EDIT:
+            return {
+                ...state,
+                editedIngredient: null,
+                editedIngredientIndex: -1,
             };
         default: return state;
     }
