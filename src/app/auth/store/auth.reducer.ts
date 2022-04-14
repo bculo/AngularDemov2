@@ -1,34 +1,77 @@
+import { state } from "@angular/animations";
+import { on, createReducer } from "@ngrx/store";
 import { User } from "../user.model";
 import * as AuthActions from './auth.actions';
 
 export interface State {
-    user: User
+    user: User;
+    authError: string;
+    loading: boolean;
 }
 
 const initialState: State = {
-    user: null
+    user: null,
+    authError: null,
+    loading: false,
 }
 
-export function authReducer(state = initialState, action: AuthActions.AuthActions) {
-    switch(action.type){
-        case AuthActions.LOGIN:
-            const login = action as AuthActions.Login;
+export const authReducer = createReducer(
+    initialState,
 
-            const user = new User(
-                login.payload.email,
-                login.payload.userId, 
-                login.payload.token, 
-                login.payload.expirationDate);
+    on(AuthActions.loginStart,
+        (state, action) => ({
+            ...state,
+            user: null,
+            authError: null,
+            loading: true,
+        }) 
+    ),
 
-            return {
-                ...state,
-                user: user
-            };
-        case AuthActions.LOGIN:
-            return {
-                ...state,
-                user: null
-            };
-        default: return state;
-    }
-}
+    on(AuthActions.authenticateSuccess,
+        (state, action) => ({
+            ...state,
+            user: new User(action.email, action.userId, action.token, action.expirationDate),
+            authError: null,
+            loading: false,
+        }) 
+    ),
+
+    on(AuthActions.authenticateFail,
+        (state, action) => ({
+            ...state,
+            user: null,
+            authError: action.errorMessage,
+            loading: false,
+        }) 
+    ),
+
+    on(AuthActions.logut,
+        (state) => ({
+            ...state,
+            user: null,
+            authError: null,
+            loading: false,
+        }) 
+    ),
+
+    on(AuthActions.signupStart,
+        (state, action) => ({
+            ...state,
+            loading: true
+        })
+    ),
+
+    on(AuthActions.clearError,
+        (state, action) => ({
+            ...state,
+            authError: null
+        })
+    ),
+    
+    on(AuthActions.autoLogin,
+        (state, action) => ({
+            ...state,
+            authError: null
+        })
+    ),
+);

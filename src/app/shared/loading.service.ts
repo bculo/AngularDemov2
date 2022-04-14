@@ -16,4 +16,9 @@ export class LoadingService {
     this.loading = !this.loading;
     this.isLoading.next(this.loading);
   }
+
+  manageLoading(isLoading: boolean) {
+    this.loading = isLoading;
+    this.isLoading.next(this.loading);
+  }
 }

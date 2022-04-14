@@ -1,13 +1,15 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { LoadingService } from 'src/app/shared/loading.service';
 import { PlaceholderDirective } from 'src/app/shared/placeholder.directive';
 import { AuthResponseData, AuthService } from '../auth.service';
 
-
+import * as fromApp from '../../store/app.reducer';
+import * as AuthActions from '../store/auth.actions';
 
 
 @Component({
@@ -22,10 +24,16 @@ export class AuthComponent implements OnInit {
   @ViewChild(PlaceholderDirective, {static: true}) componentPlaceholder!: PlaceholderDirective;
   closeSub!: Subscription;
 
-  constructor(private authService: AuthService, private loading: LoadingService, private router: Router,
-    private componentResolver: ViewContainerRef) { }
+  constructor(private loading: LoadingService,  private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+    this.store.select('auth').subscribe(authState => {
+      this.loading.manageLoading(authState.loading);
+      this.errorMessage = authState.authError;
+      if(this.errorMessage){
+        this.showErrorAlert();
+      }
+    });
   }
 
   onSwitchMode() {
@@ -36,30 +44,18 @@ export class AuthComponent implements OnInit {
     this.loading.toogleLoading();
 
     if(this.isLoginMode){
-      this.observable = this.authService.login(authForm.form.value.email, authForm.form.value.password);
+      //this.observable = this.authService.login(authForm.form.value.email, authForm.form.value.password);
+      this.store.dispatch(AuthActions.loginStart({email: authForm.form.value.email, password: authForm.form.value.password}));
     }
     else{
-      this.observable = this.authService.signup(authForm.form.value.email, authForm.form.value.password);
+      this.store.dispatch(AuthActions.signupStart({email: authForm.form.value.email, password: authForm.form.value.password}));
     }
-
-    this.observable
-      .subscribe({
-        next: (response) => {
-          this.router.navigate(['/recipe'])
-          this.loading.toogleLoading();
-        },
-        error: (error) => {
-          this.errorMessage = error.message;
-          this.showErrorAlert();
-          this.loading.toogleLoading();
-        }
-      });
 
     authForm.reset();
   }
 
   onModalClose() {
-    this.errorMessage = "";
+    this.store.dispatch(AuthActions.clearError());
   }
 
   private showErrorAlert() {

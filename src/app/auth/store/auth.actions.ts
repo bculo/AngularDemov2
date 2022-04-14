@@ -1,29 +1,46 @@
-import { Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 
-export const LOGIN_START = '[Auth] LOGIN START';
-
-export const LOGIN = '[Auth] LOGIN';
-export const LOGOUT = '[Auth] LOGOUT';
-
-export class Login implements Action {
-    readonly type: string = LOGIN;
-    constructor(public payload: {
+export const authenticateSuccess = createAction(
+    '[Auth] AUTHENTICATE SUCCESS',
+    props<{
         email: string;
         userId: string;
         token: string;
         expirationDate: Date;
-    }) {}
-}
+    }>()
+);
 
-export class Logout implements Action {
-    readonly type: string = LOGOUT;
-    constructor() {}
-}
+export const signupStart = createAction(
+    '[Auth] SIGNUP START',
+    props<{
+        email: string; 
+        password: string;
+    }>()
+);
 
-export class LoginStart implements Action {
-    readonly type: string = LOGIN_START;
+export const authenticateFail = createAction(
+    '[Auth] AUTHENTICATE FAIL',
+    props<{
+        errorMessage: string;
+    }>()
+);
 
-    constructor(public payload: {email: string; password: string;}) {}
-}
+export const logut = createAction(
+    '[Auth] LOGOUT'
+);
 
-export type AuthActions = Login | Logout;
+export const loginStart = createAction(
+    '[Auth] LOGIN START',
+    props<{
+        email: string; 
+        password: string;
+    }>()
+);
+
+export const clearError = createAction(
+    '[Auth] CLEAR ERROR', 
+);
+
+export const autoLogin = createAction(
+    '[Auth] AUTO LOGIN'
+);
