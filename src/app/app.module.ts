@@ -12,11 +12,14 @@ import { SharedModule } from './shared/shared.module';
 import * as fromApp from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function(state, action) {
-    console.log('state', state);
-    console.log('action', action);
+    //console.log('state', state);
+    //console.log('action', action);
  
     return reducer(state, action);
   };
@@ -38,8 +41,9 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer, {metaReducers}),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }), //watch ngrx state and actions -> install redux extension for GC
+    StoreRouterConnectingModule.forRoot(), //watch routing -> install redux extension for GC
     SharedModule,
-
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
