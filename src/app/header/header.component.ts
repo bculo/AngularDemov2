@@ -6,6 +6,7 @@ import { DataStorageService } from '../shared/data-storage.service';
 import * as fromApp from '../store/app.reducer';
 
 import * as AuthActions from '../auth/store/auth.actions';
+import * as RecipesActions from '../recipes/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -32,11 +33,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   saveData(){
-    this.storage.storeRecipes();
+    this.store.dispatch(RecipesActions.storeRecipes());
   }
 
   fetchData() {
-    this.storage.fetchRecipes().subscribe();
+    this.store.dispatch(RecipesActions.fetchRecipes());
   }
 
   onLogut() {

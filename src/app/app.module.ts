@@ -15,6 +15,7 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
+import { RecipeEffects } from './recipes/store/recipe.effects';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function(state, action) {
@@ -40,7 +41,7 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(fromApp.appReducer, {metaReducers}),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }), //watch ngrx state and actions -> install redux extension for GC
     StoreRouterConnectingModule.forRoot(), //watch routing -> install redux extension for GC
     SharedModule,

@@ -12,7 +12,7 @@ export interface State {
 const initialState: State = {
     user: null,
     authError: null,
-    loading: false,
+    loading: false
 }
 
 export const authReducer = createReducer(
